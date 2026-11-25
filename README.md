@@ -16,7 +16,7 @@ for f in lhc-source-*.tar.xz; do tar -xJf "$f"; done
 Get-ChildItem lhc-source-*.tar.xz | ForEach-Object { tar -xJf $_.Name }
 ```
 
-The original project README is preserved at `docs/PROJECT_README.md`. Source code, tests, configs, CI workflow, and CSV/JSON experiment outputs are included in the bundles. PNG figure files were left out of the GitHub bundles to keep the upload smaller; they remain in the uploaded source ZIP.
+The original project README is preserved at `docs/PROJECT_README.md`. Source code, tests, configs, CI workflow, and CSV/JSON experiment outputs are included in the bundles. PNG plot files were intentionally omitted from the GitHub bundles to keep the upload smaller; the corresponding CSV/JSON experiment outputs are included.
 
 ## What is included
 
