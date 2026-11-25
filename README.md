@@ -1,13 +1,29 @@
 # LHC Intelligent Anomaly Detection
 
-An offline scientific machine-learning prototype for studying unusual patterns in proton–proton collision-like events. The current experiments use a controlled synthetic event generator; real CMS NanoAOD validation is still pending.
+An offline scientific machine-learning prototype for studying unusual patterns in proton–proton collision-like events. Current reported experiments use controlled synthetic events. Real CMS NanoAOD validation is still pending.
+
+## Get the project files
+
+The project source and experiment outputs are stored in 13 `.tar.xz` bundles in this repository. Extract all bundles into the repository root to restore the project folder structure.
+
+**Linux / macOS**
+```bash
+for f in lhc-source-*.tar.xz; do tar -xJf "$f"; done
+```
+
+**Windows PowerShell**
+```powershell
+Get-ChildItem lhc-source-*.tar.xz | ForEach-Object { tar -xJf $_.Name }
+```
+
+The original project README is preserved at `docs/PROJECT_README.md`. Source code, tests, configs, CI workflow, and CSV/JSON experiment outputs are included in the bundles. PNG figure files were left out of the GitHub bundles to keep the upload smaller; they remain in the uploaded source ZIP.
 
 ## What is included
 
 - Feature engineering for jet, muon, electron, missing transverse energy, and invariant-mass observables
 - Isolation Forest, PyTorch autoencoder, and XGBoost baselines
 - SHAP-based model interpretation and event-level anomaly explanations
-- Benchmarking, robustness and drift experiments
+- Benchmarking, robustness, drift, and contamination experiments
 - Evaluation on anomaly categories held out from supervised training
 - A NanoAOD ingestion path and a checker for validating real ROOT files
 - A Streamlit dashboard and a small C++ invariant-mass utility
@@ -20,11 +36,13 @@ Docker configuration and GitHub Actions CI are included. Check the Actions resul
 
 ## Quick start
 
+After extracting the bundles:
+
 ```bash
 python -m venv .venv
 # Linux/macOS
 source .venv/bin/activate
-# Windows PowerShell: .venv\Scripts\Activate.ps1
+# Windows PowerShell: .venv\\Scripts\\Activate.ps1
 
 pip install -r requirements.txt
 python run_pipeline.py
@@ -53,17 +71,6 @@ For real-data validation steps, see [data/README.md](data/README.md). Once a rea
 ```bash
 python check_nanoaod.py data/yourfile.root --score
 ```
-
-## Repository structure
-
-- `src/lhcanom/` — ingestion, feature engineering, models, scoring, explanations, experiments
-- `app/dashboard.py` — interactive dashboard
-- `tests/` — unit and fixture-based tests
-- `results/` — tracked experiment summaries, CSV outputs, and figures
-- `cpp/invmass.cpp` — standalone invariant-mass calculation
-- `.github/workflows/ci.yml` — automated checks
-
-Generated model binaries and test-score dumps are intentionally excluded from version control.
 
 ## License
 
